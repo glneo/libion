@@ -17,6 +17,7 @@ set_target_properties(ion
 target_include_directories(ion
 	PUBLIC
 		include
+		include/kernel-headers/4.19
 )
 
 configure_file(libion.pc.in libion.pc @ONLY)
@@ -24,5 +25,10 @@ configure_file(libion.pc.in libion.pc @ONLY)
 install(TARGETS ion
 	LIBRARY DESTINATION lib
 	PUBLIC_HEADER DESTINATION include/ion)
+
+install(DIRECTORY include/kernel-headers/4.19/
+	DESTINATION include
+	FILES_MATCHING PATTERN "*.h")
+
 install(FILES ${CMAKE_BINARY_DIR}/libion.pc
 	DESTINATION lib/pkgconfig)
