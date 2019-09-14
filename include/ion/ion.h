@@ -24,7 +24,9 @@
 #include <sys/types.h>
 #include <linux/ion.h>
 
-__BEGIN_DECLS
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 int ion_open();
 int ion_close(int fd);
@@ -34,6 +36,8 @@ int ion_free(int fd, int handle_fd);
 int ion_query_heap_cnt(int fd, int* cnt);
 int ion_query_get_heaps(int fd, int cnt, void* buffers);
 
-__END_DECLS
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __ION_H */
