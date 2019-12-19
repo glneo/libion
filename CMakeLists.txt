@@ -1,7 +1,9 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0)
 PROJECT(ion)
 set(PROJECT_DESCRIPTION "ION Userspace Memory Allocator Library")
 set(PROJECT_VERSION 1.0.0)
+
+INCLUDE(GNUInstallDirs)
 
 add_library(ion
 	SHARED
@@ -23,12 +25,12 @@ target_include_directories(ion
 configure_file(libion.pc.in libion.pc @ONLY)
 
 install(TARGETS ion
-	LIBRARY DESTINATION lib
-	PUBLIC_HEADER DESTINATION include/ion)
+	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+	PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/ion)
 
 install(DIRECTORY include/kernel-headers/4.19/
-	DESTINATION include
+	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 	FILES_MATCHING PATTERN "*.h")
 
 install(FILES ${CMAKE_BINARY_DIR}/libion.pc
-	DESTINATION lib/pkgconfig)
+	DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
